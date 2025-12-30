@@ -4,7 +4,7 @@ import { jsonrepair } from "jsonrepair";
 
 const client = new OpenAI({
   baseURL: "https://api.groq.com/openai/v1",
-  apiKey: process.env.OPENROUTER_API_KEY || "",
+  apiKey: import.meta.env.VITE_OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY || "",
   dangerouslyAllowBrowser: true,
   defaultHeaders: {
     "X-Title": "Crazu Study Companion",
