@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crazu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reactflow/dist/style.min.css" />
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Space Mono"', 'monospace'],
+              mono: ['"Space Mono"', 'monospace'],
+            },
+            colors: {
+              brand: {
+                // --- STRICT PALETTE ---
+                yellow: '#FFE600',
+                black: '#000000',
+                white: '#FFFFFF',
+
+                // Mappings for legacy code to ensure visibility
+                // All semantic colors now map to the strict palette
+                dark: '#000000',    
+                light: '#FFE600',   
+                neon: '#FFE600',    
+                
+                // Color elimination mappings
+                pink: '#FFE600',
+                cyan: '#000000',
+                orange: '#FFE600',
+                purple: '#000000',
+                lime: '#FFE600',
+                
+                // Functional Colors -> Mapped to Monochrome/Yellow
+                // We will handle specific UI states via utility classes in components
+                blue: '#000000',    
+                red: '#000000',     
+                green: '#000000',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Space Mono', monospace;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      
+      * {
+        border-radius: 0px !important;
+        font-family: 'Space Mono', monospace;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333; 
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #FFE600; 
+      }
+      
+      /* Utilities */
+      .border-theme {
+        @apply border-black/10 dark:border-white/20;
+      }
+
+      .katex {
+        font-size: 1.1em;
+      }
+      .dark .katex {
+        color: white;
+      }
+
+      /* Range Input */
+      input[type=range] {
+        -webkit-appearance: none;
+        width: 100%;
+        background: transparent;
+      }
+
+      input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 24px;
+        width: 24px;
+        border-radius: 0px;
+        background: #FFE600; /* Yellow */
+        border: 2px solid #000000;
+        cursor: pointer;
+        margin-top: -10px;
+        box-shadow: 2px 2px 0px rgba(0,0,0,1);
+        transition: transform 0.1s;
+      }
+      
+      input[type=range]::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+      }
+
+      input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 4px;
+        cursor: pointer;
+        background: #e4e4e7;
+        border: 1px solid #000000;
+      }
+      
+      .dark input[type=range]::-webkit-slider-runnable-track {
+        background: #3f3f46;
+        border: 1px solid #ffffff;
+      }
+
+      input[type=range]:focus {
+        outline: none;
+      }
+
+      /* Firefox */
+      input[type=range]::-moz-range-thumb {
+        height: 24px;
+        width: 24px;
+        border-radius: 0px;
+        background: #FFE600;
+        border: 2px solid #000000;
+        cursor: pointer;
+        box-shadow: 2px 2px 0px rgba(0,0,0,1);
+      }
+      
+      input[type=range]::-moz-range-track {
+        width: 100%;
+        height: 4px;
+        cursor: pointer;
+        background: #e4e4e7;
+        border: 1px solid #000000;
+      }
+      
+      .dark input[type=range]::-moz-range-track {
+        background: #3f3f46;
+        border: 1px solid #ffffff;
+      }
+
+      /* Selection */
+      ::selection {
+        background-color: #FFE600; /* Yellow */
+        color: #000000;
+      }
+      
+      .dark ::selection {
+        background-color: #FFE600;
+        color: #000000;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.1/",
+    "react/": "https://esm.sh/react@^19.2.1/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.32.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.559.0",
+    "jspdf": "https://esm.sh/jspdf@^2.5.1",
+    "react-markdown": "https://esm.sh/react-markdown@9.0.1?bundle",
+    "remark-math": "https://esm.sh/remark-math@6.0.0?bundle",
+    "rehype-katex": "https://esm.sh/rehype-katex@7.0.0?bundle",
+    "jsonrepair": "https://esm.sh/jsonrepair@3.6.0",
+    "html2canvas": "https://esm.sh/html2canvas@1.4.1",
+    "qrcode": "https://esm.sh/qrcode@1.5.3",
+    "reactflow": "https://esm.sh/reactflow@11.10.1",
+    "dagre": "https://esm.sh/dagre@0.8.5"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
