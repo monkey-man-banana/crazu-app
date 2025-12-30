@@ -2,9 +2,13 @@ import OpenAI from "openai";
 import { StudyData, QuestionMode, QuizQuestion, TheoryQuestion, Formula, GeneratorParams, QuizConfig, InteractiveQuestion } from "../types";
 import { jsonrepair } from "jsonrepair";
 
+const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY || "";
+console.log("DEBUG: API Key Status:", apiKey ? `Present (Length: ${apiKey.length})` : "MISSING");
+console.log("DEBUG: Model:", process.env.OPENROUTER_MODEL || "Defaulting");
+
 const client = new OpenAI({
   baseURL: "https://api.groq.com/openai/v1",
-  apiKey: import.meta.env.VITE_OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY || "",
+  apiKey: apiKey,
   dangerouslyAllowBrowser: true,
   defaultHeaders: {
     "X-Title": "Crazu Study Companion",
