@@ -11,7 +11,6 @@ export default defineConfig(({ mode }) => {
       },
       plugins: [react()],
       define: {
-        'process.env.OPENROUTER_API_KEY': JSON.stringify(env.VITE_OPENROUTER_API_KEY || env.OPENROUTER_API_KEY),
         'process.env.OPENROUTER_MODEL': JSON.stringify(env.OPENROUTER_MODEL || 'llama-3.3-70b-versatile'),
         'process.env.VITE_SUPABASE_URL': JSON.stringify(env.VITE_SUPABASE_URL),
         'process.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(env.VITE_SUPABASE_ANON_KEY)

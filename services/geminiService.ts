@@ -2,12 +2,8 @@ import OpenAI from "openai";
 import { StudyData, QuestionMode, QuizQuestion, TheoryQuestion, Formula, GeneratorParams, QuizConfig, InteractiveQuestion } from "../types";
 import { jsonrepair } from "jsonrepair";
 
-// Splitting key to bypass git scanner for debug
-const part1 = "gsk_yT3eQ29jCGfTHrD5xumm";
-const part2 = "WGdyb3FYnKzSPlkC6yL5r6z78tJVWTiQ";
-const apiKey = part1 + part2;
-
-console.log("DEBUG: Using Split Key");
+const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY || "";
+console.log("DEBUG: API Key Status:", apiKey ? `Present (Length: ${apiKey.length})` : "MISSING");
 console.log("DEBUG: Model:", process.env.OPENROUTER_MODEL || "Defaulting");
 
 const client = new OpenAI({
